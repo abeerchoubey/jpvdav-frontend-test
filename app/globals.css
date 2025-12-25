@@ -1,0 +1,171 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Updated design tokens for dark theme with neon accents inspired by design brief */
+:root {
+  /* Dark theme colors */
+  --background: oklch(0.12 0.01 264);
+  --foreground: oklch(0.98 0 0);
+
+  /* Neon cyan accent (primary) */
+  --primary: oklch(0.75 0.18 195);
+  --primary-foreground: oklch(0.12 0.01 264);
+
+  /* Neon orange accent (secondary) */
+  --secondary: oklch(0.72 0.19 45);
+  --secondary-foreground: oklch(0.12 0.01 264);
+
+  /* Card and surfaces */
+  --card: oklch(0.18 0.015 264);
+  --card-foreground: oklch(0.98 0 0);
+
+  /* Muted elements */
+  --muted: oklch(0.25 0.02 264);
+  --muted-foreground: oklch(0.65 0.02 264);
+
+  /* Accent highlight */
+  --accent: oklch(0.75 0.18 195);
+  --accent-foreground: oklch(0.12 0.01 264);
+
+  /* Other utility colors */
+  --popover: oklch(0.18 0.015 264);
+  --popover-foreground: oklch(0.98 0 0);
+
+  --destructive: oklch(0.65 0.25 25);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.3 0.03 264);
+  --input: oklch(0.25 0.02 264);
+  --ring: oklch(0.75 0.18 195);
+
+  --chart-1: oklch(0.75 0.18 195);
+  --chart-2: oklch(0.72 0.19 45);
+  --chart-3: oklch(0.68 0.2 120);
+  --chart-4: oklch(0.7 0.22 285);
+  --chart-5: oklch(0.75 0.15 340);
+
+  --radius: 0.75rem;
+
+  --sidebar: oklch(0.15 0.015 264);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.75 0.18 195);
+  --sidebar-primary-foreground: oklch(0.12 0.01 264);
+  --sidebar-accent: oklch(0.25 0.02 264);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.3 0.03 264);
+  --sidebar-ring: oklch(0.75 0.18 195);
+}
+
+@theme inline {
+  --font-sans: "Geist", "Geist Fallback";
+  --font-mono: "Geist Mono", "Geist Mono Fallback";
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    cursor: none; /* Hide default cursor for custom neon trail */
+  }
+}
+
+/* Custom neon cursor trail styles */
+.cursor-trail {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  transition: transform 0.15s ease-out;
+}
+
+.cursor-glow {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, oklch(0.75 0.18 195 / 0.4) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9998;
+  mix-blend-mode: screen;
+  transition: transform 0.2s ease-out;
+}
+
+/* Smooth scroll animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Neon glow effect for CTAs */
+.neon-glow {
+  box-shadow: 0 0 10px oklch(0.75 0.18 195 / 0.5), 0 0 20px oklch(0.75 0.18 195 / 0.3), 0 0 30px
+    oklch(0.75 0.18 195 / 0.2);
+}
+
+.neon-glow-orange {
+  box-shadow: 0 0 10px oklch(0.72 0.19 45 / 0.5), 0 0 20px oklch(0.72 0.19 45 / 0.3), 0 0 30px oklch(0.72 0.19 45 / 0.2);
+}
+
+/* Performance optimization for older devices */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
